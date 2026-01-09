@@ -1,42 +1,19 @@
-use regex::Regex;
+pub mod cache;
+pub mod operator;
+pub mod wrapper;
+
+pub use cache::RegexCache;
+pub use operator::RegexpOperator;
+pub use wrapper::SQLiteRegexWrapper;
+
 use rusqlite::{Connection, Result};
-use std::collections::HashMap;
-use std::sync::Arc;
-use std::sync::Mutex;
 
 /// Registers the `regexp` function to a SQLite connection.
 ///
 /// This allows using the `REGEXP` operator in SQL queries:
 /// `SELECT * FROM table WHERE column REGEXP 'pattern'`
 pub fn register_regexp_function(conn: &Connection) -> Result<()> {
-    // Shared regex cache to avoid recompiling same patterns
-    let cache: Arc<Mutex<HashMap<String, Regex>>> = Arc::new(Mutex::new(HashMap::new()));
-
-    conn.create_scalar_function(
-        "regexp",
-        2,
-        rusqlite::functions::FunctionFlags::SQLITE_DETERMINISTIC,
-        move |ctx| {
-            let pattern_str: String = ctx.get(0)?;
-            let text: String = ctx.get(1)?;
-
-            let mut cache = cache.lock().unwrap();
-
-            let regex = if let Some(re) = cache.get(&pattern_str) {
-                re
-            } else {
-                match Regex::new(&pattern_str) {
-                    Ok(re) => {
-                        cache.insert(pattern_str.clone(), re);
-                        cache.get(&pattern_str).unwrap()
-                    }
-                    Err(e) => return Err(rusqlite::Error::UserFunctionError(Box::new(e))),
-                }
-            };
-
-            Ok(regex.is_match(&text))
-        },
-    )
+    SQLiteRegexWrapper::register(conn)
 }
 
 #[cfg(test)]
