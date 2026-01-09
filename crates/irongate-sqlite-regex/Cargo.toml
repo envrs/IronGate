@@ -5,7 +5,15 @@ edition = "2021"
 description = "A regular expression SQLite extension"
 license = "MIT"
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
-rusqlite = { version = "0.32", features = ["functions", "bundled"] }
-regex = "1.10"
-thiserror = "1"
+sqlite-loadable = { git = "https://github.com/asg017/sqlite-loadable-rs", default-features = false }
+regex = "1"
+
+[features]
+default = ["static", "ignore-invalid"]
+dynamic = []
+static = ["sqlite-loadable/static"]
+ignore-invalid = []

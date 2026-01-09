@@ -1,25 +1,19 @@
-use rusqlite::{Connection, Result};
-use crate::cache::RegexCache;
-use crate::operator::RegexpOperator;
+/// Regex wrapper class that allows for unified management of invalid regex patterns
+#[derive(Clone)]
+pub struct Regex(Option<regex::bytes::Regex>);
 
-pub struct SQLiteRegexWrapper;
+impl Regex {
+    pub fn new(re: &str) -> Result<Regex, regex::Error> {
+        let regex = match regex::bytes::Regex::new(re) {
+            Ok(r) => Some(r),
+            Err(_) if cfg!(feature = "ignore-invalid") => None,
+            Err(e) => return Err(e),
+        };
+        Ok(Regex(regex))
+    }
 
-impl SQLiteRegexWrapper {
-    pub fn register(conn: &Connection) -> Result<()> {
-        let cache = RegexCache::new();
-        let operator = RegexpOperator::new(cache);
-
-        conn.create_scalar_function(
-            "regexp",
-            2,
-            rusqlite::functions::FunctionFlags::SQLITE_DETERMINISTIC,
-            move |ctx| {
-                let pattern: String = ctx.get(0)?;
-                let text: String = ctx.get(1)?;
-
-                operator.is_match(&pattern, &text)
-                    .map_err(|e| rusqlite::Error::UserFunctionError(Box::new(e)))
-            },
-        )
+    #[inline(always)]
+    pub fn is_match(&self, haystack: &[u8]) -> bool {
+        self.0.as_ref().map_or(false, |r| r.is_match(haystack))
     }
 }
