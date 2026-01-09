@@ -1,0 +1,17 @@
+[package]
+name = "irongate-process-alive"
+version = "0.1.0"
+edition = "2021"
+description = "Efficient cross-platform process liveness check"
+license = "MIT"
+
+[dependencies]
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = [
+  "Win32_Foundation",
+  "Win32_System_Threading",
+] }
+
+[target.'cfg(target_family = "unix")'.dependencies]
+libc = "0.2"

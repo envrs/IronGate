@@ -1,0 +1,37 @@
+use std::ops::Deref;
+
+use windows_sys::Win32::{
+    Foundation::{CloseHandle, FALSE, HANDLE},
+    System::Threading::{OpenProcess, PROCESS_QUERY_LIMITED_INFORMATION},
+};
+
+use crate::Pid;
+
+pub struct Handle(HANDLE);
+
+impl Handle {
+    pub fn open(pid: Pid) -> Option<Self> {
+        let handle = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid.0) };
+        if handle.is_null() {
+            None
+        } else {
+            Some(Self(handle))
+        }
+    }
+}
+
+impl Deref for Handle {
+    type Target = HANDLE;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl Drop for Handle {
+    fn drop(&mut self) {
+        unsafe {
+            CloseHandle(self.0);
+        }
+    }
+}

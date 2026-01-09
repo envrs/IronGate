@@ -14,9 +14,7 @@ pub fn regexp(ctx: *mut sqlite3_context, values: &[*mut sqlite3_value]) -> Resul
         }
         ValueType::Blob | ValueType::Text => api::value_blob(content_value),
         _ => {
-            return Err(Error::new_message(
-                "expected argument 1 as content of type blob or text",
-            ));
+            return Err(Error::new_message("expected argument 1 as content of type blob or text"));
         }
     };
 
