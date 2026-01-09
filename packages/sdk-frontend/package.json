@@ -1,0 +1,22 @@
+{
+  "name": "@irongate/sdk-frontend",
+  "version": "0.0.1",
+  "description": "Typing for the irongate Frontend SDK",
+  "license": "MIT",
+  "types": "./src/index.d.ts",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "files": [
+    "src/*"
+  ],
+  "scripts": {
+    "generate:doc": "typedoc"
+  },
+  "peerDependencies": {
+    "@ai-sdk/provider": "^2.0.0",
+    "@codemirror/view": "^6.0.0",
+    "@codemirror/state": "^6.0.0",
+    "vue": "^3.0.0"
+  },
+  "peerDependenciesMeta": {}
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@irongate/sdk-backend",
+  "version": "0.0.1",
+  "description": "Typing for the irongate Backend SDK",
+  "license": "MIT",
+  "types": "./src/index.d.ts",
+  "files": [
+    "src/*"
+  ],
+  "scripts": {
+    "generate:doc": "typedoc"
+  },
+  "dependencies": {
+    "@irongate/quickjs-types": "workspace:*",
+    "@irongate/sdk-shared": "workspace:*"
+  }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "@irongate/quickjs-types",
+    "version": "0.25.2",
+    "description": "Typing for the QuickJS Engine",
+    "license": "MIT",
+    "types": "./src/index.d.ts",
+    "files": [
+        "src/*"
+    ],
+    "scripts": {
+        "generate:doc": "typedoc",
+        "typing": "./scripts/typing.sh"
+    }
+}

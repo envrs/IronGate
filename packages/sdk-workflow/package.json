@@ -1,0 +1,16 @@
+{
+  "name": "@irongate/sdk-workflow",
+  "version": "0.0.1",
+  "description": "Typing for the irongate Workflow SDK",
+  "license": "MIT",
+  "types": "./src/index.d.ts",
+  "files": [
+    "src/*"
+  ],
+  "scripts": {
+    "generate:doc": "typedoc"
+  },
+  "dependencies": {
+    "@irongate/quickjs-types": "workspace:*"
+  }
+}
