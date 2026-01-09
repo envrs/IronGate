@@ -1,0 +1,13 @@
+[package]
+name = "tls-imperson-test"
+version = "0.1.0"
+description = "Library for TLS impersonification"
+license = "MIT"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+parking_lot = "0.12"
+sha2 = "0.10"
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.7", features = ["full"] }

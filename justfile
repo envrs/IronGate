@@ -21,6 +21,11 @@ build-process-alive:
 build-actix-sse:
     cargo build -p irongate-actix-sse
 
+# Build the TLS impersonation libraries
+build-tls-imperson:
+    cargo build -p tls-imperson
+    cargo build -p tls-imperson-openssl
+
 # Run core library tests
 test-core:
     cargo test -p irongate-encore
@@ -41,19 +46,24 @@ test-process-alive:
 test-actix-sse:
     cargo test -p irongate-actix-sse
 
+# Run TLS impersonation tests
+test-tls-imperson:
+    cargo test -p tls-imperson
+    cargo test -p tls-imperson-openssl
+
 # Build WASM bindings using wasm-pack
 build-wasm:
     cd crates/encore && wasm-pack build --target nodejs --out-dir ../../wasm-package
 
 # Build everything
-build-all: build-core build-shell build-sqlite-regex build-process-alive build-actix-sse build-wasm
+build-all: build-core build-shell build-sqlite-regex build-process-alive build-actix-sse build-tls-imperson build-wasm
 
 # Run web integration tests
 test-web: build-wasm
     cd tests/web && yarn test
 
-# Run all tests (core + shell + sqlite-regex + process-alive + actix-sse + web)
-test-all: test-core test-shell test-sqlite-regex test-process-alive test-actix-sse test-web
+# Run all tests (core + shell + sqlite-regex + process-alive + actix-sse + tls-imperson + web)
+test-all: test-core test-shell test-sqlite-regex test-process-alive test-actix-sse test-tls-imperson test-web
 
 # Clean build artifacts
 clean:

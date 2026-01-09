@@ -11,6 +11,8 @@ High-performance data encoding, hashing, and conversion engine with first-class 
 - `crates/irongate-sqlite-regex`: A regular expression SQLite extension that enables the `REGEXP` operator.
 - `crates/irongate-process-alive`: Efficient cross-platform process liveness checking.
 - `crates/irongate-actix-sse`: Modern Server-Sent Events (SSE) implementation for Actix-web.
+- `crates/tls-imperson`: Core library for TLS impersonation primitives.
+- `crates/tls-imperson-openssl`: OpenSSL backend for TLS impersonation.
 - `crates/encore`: WASM bindings that wrap the core library for use in JavaScript/TypeScript environments.
 - `tests/web`: Integration test suite for the WASM package.
 
@@ -44,6 +46,9 @@ just build-process-alive
 
 # Build Actix SSE library
 just build-actix-sse
+
+# Build TLS impersonation libraries
+just build-tls-imperson
 
 # Build WASM bindings
 just build-wasm
@@ -137,6 +142,24 @@ async fn main() -> std::io::Result<()> {
         .bind("127.0.0.1:8080")?
         .run()
         .await
+}
+```
+
+## Usage (TLS Impersonation with OpenSSL)
+
+```rust
+use tls_imperson_openssl::{TlsConnector, TlsSettings};
+use tls_imperson::client::Curl;
+
+fn main() -> anyhow::Result<()> {
+    // Mimic Curl 7.61.1
+    let settings = TlsSettings::from_client(&Curl::v7_61_1());
+    let connector = TlsConnector::builder()
+        .settings(settings)
+        .build();
+    
+    // The connector can now be used to create impersonated TLS streams
+    Ok(())
 }
 ```
 

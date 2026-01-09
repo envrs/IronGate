@@ -1,0 +1,36 @@
+[package]
+name = "tls-imperson-openssl"
+version = "0.1.0"
+description = "Library for TLS impersonification"
+license = "MIT"
+edition = "2021"
+autotests = false
+
+[lib]
+name = "tls_imperson_openssl"
+path = "src/lib.rs"
+
+[[test]]
+name = "tls_imperson_openssl"
+path = "tests/lib.rs"
+harness = true
+
+[features]
+default = ["vendored", "native-certs"]
+
+vendored = ["openssl/vendored"]
+native-certs = ["tls-imperson/native-certs"]
+webpki-certs = ["tls-imperson/webpki-certs"]
+
+[dependencies]
+tls-imperson = { version = "0.1.0", path = "../tls-imperson" }
+openssl = "0.10"
+openssl-sys = "0.9"
+foreign-types = "0.3"
+typed-builder = "0.20"
+
+[dev-dependencies]
+openssl = { version = "0.10", features = ["vendored"] }
+tls-imperson-test = { version = "0.1.0", path = "../tls-imperson-test" }
+tokio = { version = "1", features = ["full"] }
+tokio-openssl = "0.6"
