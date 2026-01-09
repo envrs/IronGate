@@ -14,6 +14,7 @@ High-performance data encoding, hashing, and conversion engine with first-class 
 - `crates/tls-imperson`: Core library for TLS impersonation primitives.
 - `crates/tls-imperson-openssl`: OpenSSL backend for TLS impersonation.
 - `crates/irongate-os-info`: Cross-platform OS name and version detection.
+- `crates/irongate-buf-reader`: High-performance async buffered reader with peek support.
 - `crates/encore`: WASM bindings that wrap the core library for use in JavaScript/TypeScript environments.
 - `tests/web`: Integration test suite for the WASM package.
 
@@ -53,6 +54,9 @@ just build-tls-imperson
 
 # Build OS info library
 just build-os-info
+
+# Build BufReader library
+just build-buf-reader
 
 # Build WASM bindings
 just build-wasm
@@ -185,6 +189,29 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Version: 14.2.1
     // Architecture: aarch64
     // Full description: macOS 14.2.1 (23.2.0) aarch64
+    
+    Ok(())
+}
+```
+
+## Usage (Async BufReader)
+
+```rust
+use irongate_buf_reader::{AsyncBufReader, AsyncBufReadExt};
+use tokio::fs::File;
+
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let file = File::open("README.md").await?;
+    let mut reader = AsyncBufReader::new(file);
+
+    // Peek at the first 10 bytes without consuming them
+    let peeked_data = reader.peek(10).await?;
+    println!("Peeked: {:?}", std::str::from_utf8(&peeked_data).unwrap());
+
+    // Read data normally
+    let mut buffer = String::new();
+    reader.read_to_string(&mut buffer).await?;
     
     Ok(())
 }
