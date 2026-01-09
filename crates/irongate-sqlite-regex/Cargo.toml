@@ -1,0 +1,11 @@
+[package]
+name = "irongate-sqlite-regex"
+version = "0.1.0"
+edition = "2021"
+description = "A regular expression SQLite extension"
+license = "MIT"
+
+[dependencies]
+rusqlite = { version = "0.32", features = ["functions", "bundled"] }
+regex = "1.10"
+thiserror = "1"
