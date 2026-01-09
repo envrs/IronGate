@@ -1,0 +1,82 @@
+[package]
+name = "irongate-encore"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+license = "MIT OR Apache-2.0"
+description = "High-performance data encoding, hashing, compression and conversion engine"
+homepage = "https://github.com/KhulnaSoft/irongate"
+repository = "https://github.com/KhulnaSoft/irongate"
+documentation = "https://docs.rs/irongate-encore"
+readme = "../../README.md"
+keywords = [
+  "encoding",
+  "hashing",
+  "compression",
+  "convert",
+  "security"
+]
+categories = [
+  "encoding",
+  "cryptography",
+  "compression",
+  "wasm"
+]
+
+[lib]
+name = "irongate_encore"
+crate-type = ["rlib", "cdylib"]
+
+[features]
+default = ["std", "encode", "hash"]
+
+serde = ["dep:serde"]
+std = []
+wasm = ["dep:wasm-bindgen", "serde"]
+napi = ["dep:napi", "dep:napi-derive"]
+
+hash = ["dep:sha2", "dep:sha1", "dep:md5", "dep:blake3"]
+encode = ["dep:data-encoding", "dep:hex", "dep:base64", "dep:percent-encoding", "dep:bstr"]
+compress = ["dep:flate2", "dep:zstd"]
+
+all = ["hash", "encode", "compress", "wasm"]
+
+[dependencies]
+# Encoding
+data-encoding = { version = "2.6", optional = true }
+hex = { version = "0.4", optional = true }
+base64 = { version = "0.22", optional = true }
+percent-encoding = { version = "2.3", optional = true }
+
+# Hashing
+sha2 = { version = "0.10", optional = true }
+sha1 = { version = "0.10", optional = true }
+md5 = { version = "0.7", optional = true }
+blake3 = { version = "1.5", optional = true }
+
+# Compression
+flate2 = { version = "1.0", optional = true }
+zstd = { version = "0.13", optional = true }
+
+# WASM
+wasm-bindgen = { version = "0.2", optional = true }
+serde = { version = "1.0", optional = true, features = ["derive"] }
+
+# NAPI (Node.js bindings)
+napi = { version = "2", optional = true, default-features = false, features = ["napi8"] }
+napi-derive = { version = "2", optional = true }
+
+# Utilities
+thiserror = "1.0"
+bytes = "1.5"
+bstr = { version = "1.9", optional = true }
+
+[dev-dependencies]
+criterion = "0.5"
+proptest = "1.4"
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = "z"
+panic = "abort"

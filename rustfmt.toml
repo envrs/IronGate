@@ -1,0 +1,12 @@
+edition = "2021"
+max_width = 100
+use_small_heuristics = "Max"
+newline_style = "Unix"
+group_imports = "StdExternalCrate"
+combine_control_expr = true
+condense_wildcard_suffixes = true
+imports_granularity = "Crate"
+reorder_impl_items = true
+type_alias_normal_style = "Hash"
+indent_style = "Block"
+control_brace_style = "AlwaysNextLine"
