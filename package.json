@@ -1,0 +1,14 @@
+{
+    "name": "irongate-monorepo",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "test": "pnpm -r test",
+        "build": "pnpm -r build",
+        "clean": "pnpm -r clean"
+    },
+    "packageManager": "pnpm@9.0.0",
+    "engines": {
+        "node": ">=18"
+    }
+}

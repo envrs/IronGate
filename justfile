@@ -76,7 +76,7 @@ build-all: build-core build-shell build-sqlite-regex build-process-alive build-a
 
 # Run web integration tests
 test-web: build-wasm
-    cd tests/web && yarn test
+    cd tests/web && pnpm test
 
 # Run all tests (core + shell + sqlite-regex + process-alive + actix-sse + tls-imperson + os-info + buf-reader + web)
 test-all: test-core test-shell test-sqlite-regex test-process-alive test-actix-sse test-tls-imperson test-os-info test-buf-reader test-web
