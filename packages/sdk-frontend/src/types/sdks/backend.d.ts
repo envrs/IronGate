@@ -1,11 +1,14 @@
 import { type BackendEndpoints, type BackendEvents } from "../types/backend";
 import type { PromisifiedReturnType } from "../types/utils";
+
+type DropFirst<T extends any[]> = T extends [any, ...infer U] ? U : never;
+
 /**
  * Utilities to interact with the backend plugin.
  * @category Backend
  */
 export type BackendSDK<T extends BackendEndpoints, E extends BackendEvents> = {
-    [K in keyof T]: (...args: Parameters<T[K]>) => PromisifiedReturnType<T[K]>;
+    [K in keyof T]: (...args: DropFirst<Parameters<T[K]>>) => PromisifiedReturnType<T[K]>;
 } & {
     /**
      * Subscribe to a backend event.

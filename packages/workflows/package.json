@@ -1,0 +1,18 @@
+{
+  "name": "workflows",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "node ./scripts/build.mjs"
+  },
+  "dependencies": {
+    "qs": "6.14.0",
+    "xml-js": "1.6.11"
+  },
+  "devDependencies": {
+    "@irongate/sdk-workflow": "workspace:*",
+    "@types/qs": "6.14.0",
+    "ajv": "^8.17.1",
+    "terser": "^5.44.1",
+    "zod": "^4.1.13"
+  }
+}

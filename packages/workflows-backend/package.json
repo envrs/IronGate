@@ -1,0 +1,14 @@
+{
+  "name": "workflows-backend",
+  "version": "0.0.1",
+  "type": "module",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@irongate/sdk-backend": "workspace:*",
+    "@irongate/sdk-workflow": "workspace:*",
+    "workflows-shared": "workspace:*"
+  }
+}

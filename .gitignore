@@ -21,13 +21,18 @@
 
 # Node / JS
 node_modules/
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+dist/
+dist-workflows/
+*.tsbuildinfo
+
+# Build artifacts in packages
+packages/*/dist
+packages/*/dist-workflows
+**/*.js
+**/*.js.map
+**/*.d.ts
+!packages/**/node_modules/**/*.d.ts
+!node_modules/**/*.d.ts
 
 # WASM build artifacts
 /wasm-package/

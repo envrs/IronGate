@@ -1,0 +1,11 @@
+{
+  "author": {
+    "name": "Irongate Labs Inc.",
+    "email": "dev@irongate.io"
+  },
+  "url": "https://github.com/irongate-community/workflows/blob/main/packages/workflows/src/url-decode/README.md",
+  "description": "Decode a URL",
+  "id": "url-decode",
+  "name": "URL Decode",
+  "version": "0.0.1"
+}

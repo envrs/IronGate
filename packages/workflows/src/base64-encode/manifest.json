@@ -1,0 +1,11 @@
+{
+  "author": {
+    "name": "Irongate Labs Inc.",
+    "email": "dev@irongate.io"
+  },
+  "url": "https://github.com/irongate-community/workflows/blob/main/packages/workflows/src/base64-encode/README.md",
+  "description": "Base64 encode a string",
+  "id": "base64-encode",
+  "name": "Base64 Encode",
+  "version": "0.0.1"
+}

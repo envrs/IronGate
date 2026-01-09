@@ -1,0 +1,23 @@
+{
+  "name": "workflows-frontend",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@irongate/primevue": "workspace:*",
+    "pinia": "^3.0.4",
+    "primevue": "4.1.0",
+    "workflows-shared": "workspace:*",
+    "vue": "3.5.25"
+  },
+  "devDependencies": {
+    "@irongate/sdk-backend": "workspace:*",
+    "@irongate/sdk-frontend": "workspace:*",
+    "@codemirror/view": "6.39.0",
+    "workflows-backend": "workspace:*",
+    "workflows-shared": "workspace:*",
+    "vue-tsc": "3.1.7"
+  }
+}

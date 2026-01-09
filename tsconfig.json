@@ -18,6 +18,15 @@
     },
     "references": [
         {
+            "path": "./packages/plugin-backend"
+        },
+        {
+            "path": "./packages/plugin-frontend"
+        },
+        {
+            "path": "./packages/primevue"
+        },
+        {
             "path": "./packages/quickjs-types"
         },
         {
@@ -31,6 +40,21 @@
         },
         {
             "path": "./packages/sdk-workflow"
+        },
+        {
+            "path": "./packages/tailwindcss"
+        },
+        {
+            "path": "./packages/workflows"
+        },
+        {
+            "path": "./packages/workflows-backend"
+        },
+        {
+            "path": "./packages/workflows-frontend"
+        },
+        {
+            "path": "./packages/workflows-shared"
         },
         {
             "path": "./tests/web"

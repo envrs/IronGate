@@ -1,0 +1,27 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "lib": [
+            "DOM",
+            "ESNext"
+        ],
+        "types": [
+            "@irongate/sdk-backend"
+        ]
+    },
+    "include": [
+        "./src/**/*.ts"
+    ],
+    "exclude": [
+        "./vite.config.ts",
+        "node_modules"
+    ],
+    "references": [
+        {
+            "path": "../sdk-frontend"
+        },
+        {
+            "path": "../sdk-backend"
+        }
+    ]
+}

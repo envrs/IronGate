@@ -1,3 +1,4 @@
+/// <reference path="./typing.d.ts" />
 import { Request, Response } from "@irongate/sdk-shared";
 
 export declare class Backend {

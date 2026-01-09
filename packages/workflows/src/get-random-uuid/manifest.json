@@ -1,0 +1,10 @@
+{
+  "author": {
+    "name": "hahwul"
+  },
+  "url": "https://github.com/irongate-community/workflows/blob/main/packages/workflows/src/get-random-uuid/README.md",
+  "description": "Workflow for generating a random UUID.",
+  "id": "get-random-uuid",
+  "name": "Get Random UUID",
+  "version": "0.0.1"
+}

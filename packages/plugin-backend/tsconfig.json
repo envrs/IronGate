@@ -1,0 +1,26 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "composite": true,
+        "types": [
+            "@irongate/quickjs-types",
+            "@irongate/sdk-backend",
+            "node"
+        ]
+    },
+    "include": [
+        "./src/**/*.ts"
+    ],
+    "exclude": [
+        "./vite.config.ts",
+        "node_modules"
+    ],
+    "references": [
+        {
+            "path": "../sdk-backend"
+        },
+        {
+            "path": "../quickjs-types"
+        }
+    ]
+}

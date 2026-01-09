@@ -24,6 +24,8 @@ declare module "irongate:plugin" {
    * The SDK for the API RPC service.
    * @category API
    */
+  export type DefineAPI<T> = T;
+
   export type APISDK<API = {}, Events = {}> = {
     /**
      * Sends an event to the frontend plugin.
