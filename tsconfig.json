@@ -1,0 +1,44 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "lib": [
+            "ES2022"
+        ],
+        "declaration": true,
+        "sourceMap": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true,
+        "composite": true,
+        "rootDir": ".",
+        "baseUrl": "."
+    },
+    "references": [
+        {
+            "path": "./packages/quickjs-types"
+        },
+        {
+            "path": "./packages/sdk-backend"
+        },
+        {
+            "path": "./packages/sdk-frontend"
+        },
+        {
+            "path": "./packages/sdk-shared"
+        },
+        {
+            "path": "./packages/sdk-workflow"
+        },
+        {
+            "path": "./tests/web"
+        }
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "coverage"
+    ]
+}
