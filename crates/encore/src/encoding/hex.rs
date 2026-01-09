@@ -54,9 +54,7 @@ impl HexEncode {
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.hex_encode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.hex_encode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }
 
@@ -90,8 +88,6 @@ impl HexDecode {
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.hex_decode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.hex_decode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }

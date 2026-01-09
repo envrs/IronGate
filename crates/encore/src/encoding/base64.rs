@@ -19,9 +19,7 @@ impl Base64Encode {
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.base64_encode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.base64_encode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }
 
@@ -43,8 +41,6 @@ impl Base64Decode {
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.base64_decode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.base64_decode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }

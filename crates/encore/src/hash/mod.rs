@@ -12,15 +12,11 @@ pub struct Md5Hash {
 impl Md5Hash {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Md5Hash {
-        Md5Hash {
-            md5_hash: irongate_encore::Md5Hash::new(),
-        }
+        Md5Hash { md5_hash: irongate_encore::Md5Hash::new() }
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.md5_hash
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.md5_hash.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }
 
@@ -33,15 +29,11 @@ pub struct Sha1Hash {
 impl Sha1Hash {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Sha1Hash {
-        Sha1Hash {
-            sha1_hash: irongate_encore::Sha1Hash::new(),
-        }
+        Sha1Hash { sha1_hash: irongate_encore::Sha1Hash::new() }
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.sha1_hash
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.sha1_hash.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }
 
@@ -82,14 +74,10 @@ impl Sha2Hash {
             "Sha512" => Sha2Version::Sha512,
             _ => Sha2Version::Sha256,
         };
-        Ok(Sha2Hash {
-            sha2_hash: irongate_encore::Sha2Hash::new(version),
-        })
+        Ok(Sha2Hash { sha2_hash: irongate_encore::Sha2Hash::new(version) })
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.sha2_hash
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.sha2_hash.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }

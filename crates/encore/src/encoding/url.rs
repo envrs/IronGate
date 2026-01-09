@@ -32,9 +32,7 @@ impl UrlEncode {
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.url_encode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.url_encode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }
 
@@ -47,14 +45,10 @@ pub struct UrlDecode {
 impl UrlDecode {
     #[wasm_bindgen(constructor)]
     pub fn new() -> UrlDecode {
-        UrlDecode {
-            url_decode: irongate_encore::UrlDecode::new(),
-        }
+        UrlDecode { url_decode: irongate_encore::UrlDecode::new() }
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.url_decode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.url_decode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }

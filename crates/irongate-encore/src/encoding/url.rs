@@ -31,9 +31,7 @@ pub struct UrlEncode {
 }
 
 fn extend_with_grapheme_encode(output: &mut Vec<u8>, grapheme: &[u8]) {
-    grapheme
-        .iter()
-        .for_each(|b| output.extend_from_slice(percent_encode_byte(*b).as_bytes()));
+    grapheme.iter().for_each(|b| output.extend_from_slice(percent_encode_byte(*b).as_bytes()));
 }
 
 impl Operation for UrlEncode {
@@ -58,10 +56,7 @@ impl Operation for UrlEncode {
 
 impl UrlEncode {
     pub fn new(non_ascii: bool, charset: Option<String>) -> Self {
-        UrlEncode {
-            non_ascii,
-            charset: charset.unwrap_or_default(),
-        }
+        UrlEncode { non_ascii, charset: charset.unwrap_or_default() }
     }
 }
 
@@ -72,9 +67,7 @@ mod tests {
     #[test]
     fn url_decode() {
         let encoder = UrlDecode::new();
-        let actual = encoder
-            .execute("irongate @%C3%A9%C3%A9%F0%9F%A5%96".as_bytes())
-            .unwrap();
+        let actual = encoder.execute("irongate @%C3%A9%C3%A9%F0%9F%A5%96".as_bytes()).unwrap();
         let expected = "irongate @éé🥖".as_bytes().to_vec();
         assert_eq!(actual, expected);
     }
@@ -114,9 +107,8 @@ mod tests {
     #[test]
     fn url_encode_invalid_utf_8() {
         let encoder = UrlEncode::new(false, None);
-        let actual = encoder
-            .execute(&[0x98, 0xfd, 0xe0, 0xbf, 0xb8, 0xa7, 0xd6, 0xe1, 0x74, 0xa0])
-            .unwrap();
+        let actual =
+            encoder.execute(&[0x98, 0xfd, 0xe0, 0xbf, 0xb8, 0xa7, 0xd6, 0xe1, 0x74, 0xa0]).unwrap();
         let expected = &[0x98, 0xfd, 0xe0, 0xbf, 0xb8, 0xa7, 0xd6, 0xe1, 0x74, 0xa0];
         assert_eq!(actual, expected);
     }
@@ -124,9 +116,8 @@ mod tests {
     #[test]
     fn url_encode_non_ascii_invalid_utf_8() {
         let encoder = UrlEncode::new(true, None);
-        let actual = encoder
-            .execute(&[0x98, 0xfd, 0xe0, 0xbf, 0xb8, 0xa7, 0xd6, 0xe1, 0x74, 0xa0])
-            .unwrap();
+        let actual =
+            encoder.execute(&[0x98, 0xfd, 0xe0, 0xbf, 0xb8, 0xa7, 0xd6, 0xe1, 0x74, 0xa0]).unwrap();
         let expected = "%98%FD%E0%BF%B8%A7%D6%E1t%A0".as_bytes().to_vec();
         assert_eq!(actual, expected);
     }

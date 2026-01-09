@@ -100,9 +100,8 @@ mod tests {
     #[test]
     fn url_decode() {
         let encoder = HtmlDecode::new();
-        let actual = encoder
-            .execute(b"&#39;&amp;&lt;script&gt;alert(1)&lt;/script&gt;a&quot;")
-            .unwrap();
+        let actual =
+            encoder.execute(b"&#39;&amp;&lt;script&gt;alert(1)&lt;/script&gt;a&quot;").unwrap();
         let expected = b"\\&<script>alert(1)</script>a\"".to_vec();
         assert_eq!(actual, expected);
     }

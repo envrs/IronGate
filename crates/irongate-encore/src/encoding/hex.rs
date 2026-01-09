@@ -54,14 +54,9 @@ impl Operation for HexEncode {
             HexFormat::Upper => hex::encode_upper(input),
         };
         let mut output = vec![];
-        let delimiter = self
-            .delimiter
-            .clone()
-            .and_then(|d| if d.is_empty() { None } else { Some(d) });
-        let prefix = self
-            .prefix
-            .clone()
-            .and_then(|p| if p.is_empty() { None } else { Some(p) });
+        let delimiter =
+            self.delimiter.clone().and_then(|d| if d.is_empty() { None } else { Some(d) });
+        let prefix = self.prefix.clone().and_then(|p| if p.is_empty() { None } else { Some(p) });
         let mut chunks = hex_string.as_bytes().chunks(2).peekable();
         while let Some(chunk) = chunks.next() {
             if let Some(p) = &prefix {
@@ -80,11 +75,7 @@ impl Operation for HexEncode {
 
 impl HexEncode {
     pub const fn new(format: HexFormat, prefix: Option<String>, delimiter: Option<String>) -> Self {
-        HexEncode {
-            format,
-            prefix,
-            delimiter,
-        }
+        HexEncode { format, prefix, delimiter }
     }
 }
 
@@ -103,9 +94,8 @@ mod tests {
     #[test]
     fn hex_decode_prefix() {
         let encoder = HexDecode::new(Some("\\x".to_string()), None);
-        let actual = encoder
-            .execute("\\x69\\x72\\x6f\\x6e\\x67\\x61\\x74\\x65".as_bytes())
-            .unwrap();
+        let actual =
+            encoder.execute("\\x69\\x72\\x6f\\x6e\\x67\\x61\\x74\\x65".as_bytes()).unwrap();
         let expected = "irongate".as_bytes().to_vec();
         assert_eq!(actual, expected);
     }

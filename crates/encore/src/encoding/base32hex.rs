@@ -10,15 +10,11 @@ pub struct Base32HexEncode {
 impl Base32HexEncode {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Base32HexEncode {
-        Base32HexEncode {
-            base32hex_encode: irongate_encore::Base32HexEncode::new(),
-        }
+        Base32HexEncode { base32hex_encode: irongate_encore::Base32HexEncode::new() }
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.base32hex_encode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.base32hex_encode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }
 
@@ -31,14 +27,10 @@ pub struct Base32HexDecode {
 impl Base32HexDecode {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Base32HexDecode {
-        Base32HexDecode {
-            base32hex_decode: irongate_encore::Base32HexDecode::new(),
-        }
+        Base32HexDecode { base32hex_decode: irongate_encore::Base32HexDecode::new() }
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.base32hex_decode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.base32hex_decode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }

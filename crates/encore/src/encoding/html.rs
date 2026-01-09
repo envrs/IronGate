@@ -10,15 +10,11 @@ pub struct HtmlEncode {
 impl HtmlEncode {
     #[wasm_bindgen(constructor)]
     pub fn new() -> HtmlEncode {
-        HtmlEncode {
-            html_encode: irongate_encore::HtmlEncode::new(),
-        }
+        HtmlEncode { html_encode: irongate_encore::HtmlEncode::new() }
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.html_encode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.html_encode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }
 
@@ -31,14 +27,10 @@ pub struct HtmlDecode {
 impl HtmlDecode {
     #[wasm_bindgen(constructor)]
     pub fn new() -> HtmlDecode {
-        HtmlDecode {
-            html_decode: irongate_encore::HtmlDecode::new(),
-        }
+        HtmlDecode { html_decode: irongate_encore::HtmlDecode::new() }
     }
 
     pub fn apply(&self, input: &[u8]) -> Result<Vec<u8>, JsValue> {
-        self.html_decode
-            .execute(input)
-            .map_err(|err| JsValue::from_str(&format!("{err:?}")))
+        self.html_decode.execute(input).map_err(|err| JsValue::from_str(&format!("{err:?}")))
     }
 }
