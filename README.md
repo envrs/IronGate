@@ -10,6 +10,7 @@ High-performance data encoding, hashing, and conversion engine with first-class 
 - `crates/irongate-shell`: Cross-platform asynchronous shell script execution without temporary files.
 - `crates/irongate-sqlite-regex`: A regular expression SQLite extension that enables the `REGEXP` operator.
 - `crates/irongate-process-alive`: Efficient cross-platform process liveness checking.
+- `crates/irongate-actix-sse`: Modern Server-Sent Events (SSE) implementation for Actix-web.
 - `crates/encore`: WASM bindings that wrap the core library for use in JavaScript/TypeScript environments.
 - `tests/web`: Integration test suite for the WASM package.
 
@@ -40,6 +41,9 @@ just build-sqlite-regex
 
 # Build process alive library
 just build-process-alive
+
+# Build Actix SSE library
+just build-actix-sse
 
 # Build WASM bindings
 just build-wasm
@@ -107,6 +111,32 @@ fn main() {
         State::Dead => println!("Process is dead."),
         State::Unknown => println!("Status is unknown (check permissions)."),
     }
+}
+```
+
+## Usage (Actix SSE)
+
+```rust
+use actix_web::{get, App, HttpServer};
+use irongate_irongate_actix_sse::{Event, Sse};
+use tokio_stream::iter;
+use std::time::Duration;
+
+#[get("/events")]
+async fn events() -> Sse<impl tokio_stream::Stream<Item = Result<Event, actix_web::Error>>> {
+    let stream = iter(vec![
+        Ok(Event::data("Hello").event("greeting")),
+        Ok(Event::data("World").id("1")),
+    ]);
+    Sse::from_stream(stream)
+}
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| App::new().service(events))
+        .bind("127.0.0.1:8080")?
+        .run()
+        .await
 }
 ```
 

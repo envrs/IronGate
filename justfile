@@ -17,6 +17,10 @@ build-sqlite-regex:
 build-process-alive:
     cargo build -p irongate-process-alive
 
+# Build the Actix SSE library
+build-actix-sse:
+    cargo build -p irongate-actix-sse
+
 # Run core library tests
 test-core:
     cargo test -p irongate-encore
@@ -33,19 +37,23 @@ test-sqlite-regex:
 test-process-alive:
     cargo test -p irongate-process-alive
 
+# Run Actix SSE tests
+test-actix-sse:
+    cargo test -p irongate-actix-sse
+
 # Build WASM bindings using wasm-pack
 build-wasm:
     cd crates/encore && wasm-pack build --target nodejs --out-dir ../../wasm-package
 
 # Build everything
-build-all: build-core build-shell build-sqlite-regex build-process-alive build-wasm
+build-all: build-core build-shell build-sqlite-regex build-process-alive build-actix-sse build-wasm
 
 # Run web integration tests
 test-web: build-wasm
     cd tests/web && yarn test
 
-# Run all tests (core + shell + sqlite-regex + process-alive + web)
-test-all: test-core test-shell test-sqlite-regex test-process-alive test-web
+# Run all tests (core + shell + sqlite-regex + process-alive + actix-sse + web)
+test-all: test-core test-shell test-sqlite-regex test-process-alive test-actix-sse test-web
 
 # Clean build artifacts
 clean:
