@@ -97,18 +97,15 @@ fn main() -> rusqlite::Result<()> {
 ## Usage (Process Alive)
 
 ```rust
-use irongate_process_alive::{is_alive, ProcessExt};
+use irongate_process_alive::{Pid, State, state};
 
 fn main() {
-    let pid = 1234;
+    let pid = Pid::from(1234);
     
-    // Using function
-    let status = is_alive(pid);
-    println!("Process {} status: {}", pid, status);
-    
-    // Using trait extension
-    if pid.status().is_alive() {
-        println!("It's alive!");
+    match state(pid) {
+        State::Alive => println!("Process is alive!"),
+        State::Dead => println!("Process is dead."),
+        State::Unknown => println!("Status is unknown (check permissions)."),
     }
 }
 ```
