@@ -13,6 +13,7 @@ High-performance data encoding, hashing, and conversion engine with first-class 
 - `crates/irongate-actix-sse`: Modern Server-Sent Events (SSE) implementation for Actix-web.
 - `crates/tls-imperson`: Core library for TLS impersonation primitives.
 - `crates/tls-imperson-openssl`: OpenSSL backend for TLS impersonation.
+- `crates/irongate-os-info`: Cross-platform OS name and version detection.
 - `crates/encore`: WASM bindings that wrap the core library for use in JavaScript/TypeScript environments.
 - `tests/web`: Integration test suite for the WASM package.
 
@@ -49,6 +50,9 @@ just build-actix-sse
 
 # Build TLS impersonation libraries
 just build-tls-imperson
+
+# Build OS info library
+just build-os-info
 
 # Build WASM bindings
 just build-wasm
@@ -159,6 +163,29 @@ fn main() -> anyhow::Result<()> {
         .build();
     
     // The connector can now be used to create impersonated TLS streams
+    Ok(())
+}
+```
+
+## Usage (OS Info)
+
+```rust
+use irongate_os_info::get;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let info = get()?;
+    
+    println!("OS: {}", info.os_type);
+    println!("Version: {}", info.version);
+    println!("Architecture: {}", info.architecture);
+    println!("Full description: {}", info.description());
+    
+    // Example output on macOS:
+    // OS: macOS
+    // Version: 14.2.1
+    // Architecture: aarch64
+    // Full description: macOS 14.2.1 (23.2.0) aarch64
+    
     Ok(())
 }
 ```

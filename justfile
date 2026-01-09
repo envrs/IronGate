@@ -26,6 +26,10 @@ build-tls-imperson:
     cargo build -p tls-imperson
     cargo build -p tls-imperson-openssl
 
+# Build the OS info library
+build-os-info:
+    cargo build -p irongate-os-info
+
 # Run core library tests
 test-core:
     cargo test -p irongate-encore
@@ -51,19 +55,23 @@ test-tls-imperson:
     cargo test -p tls-imperson
     cargo test -p tls-imperson-openssl
 
+# Run OS info tests
+test-os-info:
+    cargo test -p irongate-os-info
+
 # Build WASM bindings using wasm-pack
 build-wasm:
     cd crates/encore && wasm-pack build --target nodejs --out-dir ../../wasm-package
 
 # Build everything
-build-all: build-core build-shell build-sqlite-regex build-process-alive build-actix-sse build-tls-imperson build-wasm
+build-all: build-core build-shell build-sqlite-regex build-process-alive build-actix-sse build-tls-imperson build-os-info build-wasm
 
 # Run web integration tests
 test-web: build-wasm
     cd tests/web && yarn test
 
-# Run all tests (core + shell + sqlite-regex + process-alive + actix-sse + tls-imperson + web)
-test-all: test-core test-shell test-sqlite-regex test-process-alive test-actix-sse test-tls-imperson test-web
+# Run all tests (core + shell + sqlite-regex + process-alive + actix-sse + tls-imperson + os-info + web)
+test-all: test-core test-shell test-sqlite-regex test-process-alive test-actix-sse test-tls-imperson test-os-info test-web
 
 # Clean build artifacts
 clean:
